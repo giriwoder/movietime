@@ -1,0 +1,99 @@
+.Movie-Title {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.please-hide {
+    background-color: white;
+    color: white;
+}
+
+.movie-overlay-movies {
+    width: 75%;
+    position: relative;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+.img-style {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.move {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    font-size: 18px;
+    display: none;
+}
+
+.minus {
+    position: absolute;
+    left: 80%;
+    top: 5%;
+    font-size: 18px;
+    display: none;
+}
+
+.add {
+    position: absolute;
+    left: 10%;
+    top: 80%;
+    font-size: 18px;
+    display: none;
+}
+
+.copy {
+    position: absolute;
+    left: 80%;
+    top: 80%;
+    font-size: 18px;
+    display: none;
+}
+
+img:hover {
+    opacity: .3;
+}
+
+.movie-overlay-movies:hover .add {
+    display: block;
+}
+
+.movie-overlay-movies:hover .minus {
+    display: block;
+}
+
+.movie-overlay-movies:hover .copy {
+    display: block;
+}
+
+.movie-overlay-movies:hover .move {
+    display: block;
+}
+
+.view-button {
+    border-radius: 10px;
+    background-color: blue;
+    left: 45%;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .move {
+        font-size: 10px;
+    }
+    .minus {
+        font-size: 10px;
+    }
+    .copy {
+        font-size: 10px;
+    }
+    .add {
+        font-size: 10px;
+    }
+}
+

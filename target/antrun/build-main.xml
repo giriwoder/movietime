@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <copy todir="/Users/soheey/IdeaProjects/20231-project-team-5/target/classes/public">
+      <fileset dir="/Users/soheey/IdeaProjects/20231-project-team-5/site/build" />
+    </copy>
+  </target>
+</project>

@@ -1,0 +1,10 @@
+cypress
+node_modules
+node
+static
+public
+.cache
+.gitignore
+venv
+__pycache__
+reportWebVitals.js

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieDetailEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">310 Project</a> &gt; <a href="index.source.html" class="el_package">edu.usc.csci310.project.com.backend</a> &gt; <span class="el_source">MovieDetailEntity.java</span></div><h1>MovieDetailEntity.java</h1><pre class="source lang-java linenums">package edu.usc.csci310.project.com.backend;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+// post/userid/listid/movies {moviedetail request body}
+// ensure that user exists
+// findByListID -&gt; list entity
+// save MovieEntity
+// list entity save with movie
+
+@Entity
+@Table(name = &quot;movie_details&quot;)
+public class MovieDetailEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int tutorialId;
+
+    @Column
+    private long movieDbId;
+
+    @Column
+    private String picture;
+
+    @Column
+    private String title;
+
+    @Column(length=6000)
+    private String plot;
+
+    @Column
+    private String genre;
+
+    @Column(length=6000)
+    private String studio;
+
+    @Column(length=8000)
+    private String actors;
+
+    @Column(length=6000)
+    private String directors;
+
+<span class="fc" id="L47">    @ManyToMany(fetch = FetchType.LAZY,</span>
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = &quot;movies&quot;)
+    @JsonIgnore
+    private Set&lt;MovieListEntity&gt; lists = new HashSet&lt;&gt;();
+
+<span class="fc" id="L56">    public MovieDetailEntity() {</span>
+
+<span class="fc" id="L58">    }</span>
+    public int GetTutorialId()
+    {
+<span class="fc" id="L61">        return tutorialId;</span>
+    }
+
+    public void setTutorialId(int tutorial_id)
+    {
+<span class="fc" id="L66">        this.tutorialId = tutorial_id;</span>
+<span class="fc" id="L67">    }</span>
+
+    public String getPicture()
+    {
+<span class="fc" id="L71">        return this.picture;</span>
+    }
+
+    public void setPicture(String picture)
+    {
+<span class="fc" id="L76">        this.picture = picture;</span>
+<span class="fc" id="L77">    }</span>
+
+    public String getTitle()
+    {
+<span class="fc" id="L81">        return this.title;</span>
+    }
+
+    public void setTitle(String title)
+    {
+<span class="fc" id="L86">        this.title = title;</span>
+<span class="fc" id="L87">    }</span>
+
+    public String getPlot()
+    {
+<span class="fc" id="L91">        return this.plot;</span>
+    }
+
+    public void setPlot(String plot)
+    {
+<span class="fc" id="L96">        this.plot = plot;</span>
+<span class="fc" id="L97">    }</span>
+
+    public String getGenre()
+    {
+<span class="fc" id="L101">        return this.genre;</span>
+    }
+
+    public void setGenre(String genre)
+    {
+<span class="fc" id="L106">        this.genre = genre;</span>
+<span class="fc" id="L107">    }</span>
+
+    public String getStudio()
+    {
+<span class="fc" id="L111">        return this.studio;</span>
+    }
+
+    public void setStudio(String studio)
+    {
+<span class="fc" id="L116">        this.studio = studio;</span>
+<span class="fc" id="L117">    }</span>
+
+    public String getActors()
+    {
+<span class="fc" id="L121">        return this.actors;</span>
+    }
+
+    public void setActors(String actors)
+    {
+<span class="fc" id="L126">        this.actors = actors;</span>
+<span class="fc" id="L127">    }</span>
+    public String getDirectors()
+    {
+<span class="fc" id="L130">        return this.directors;</span>
+    }
+
+    public void setDirectors(String directors)
+    {
+<span class="fc" id="L135">        this.directors = directors;</span>
+<span class="fc" id="L136">    }</span>
+
+    public long getMovieDbId()
+    {
+<span class="fc" id="L140">        return this.movieDbId;</span>
+    }
+
+    public void setMovieDbId(long id)
+    {
+<span class="fc" id="L145">        this.movieDbId = id;</span>
+<span class="fc" id="L146">    }</span>
+
+    public String getDirector()
+    {
+<span class="fc" id="L150">        return this.directors;</span>
+    }
+
+    public void setDirector(String director)
+    {
+<span class="fc" id="L155">        this.directors = director;</span>
+<span class="fc" id="L156">    }</span>
+
+    public Set&lt;MovieListEntity&gt; GetMoviesLists() {
+<span class="fc" id="L159">        return lists;</span>
+    }
+
+    public void addMovies(MovieListEntity list) {
+<span class="fc" id="L163">        lists.add((list));</span>
+<span class="fc" id="L164">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

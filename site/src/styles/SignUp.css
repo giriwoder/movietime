@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+button {
+    border-radius: 1rem;
+}
+
+button:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: darkgray;
+}
+
+.label-signup{
+    display: block;
+    font-size: 16px;
+    color: black;
+    /*padding: 5px;*/
+    font-family: 'Comfortaa', cursive;
+}
+
+.input-signup{
+    /*font-size: larger;*/
+    /*padding: 5px;*/
+    margin: 2px;
+}
+.btn-signup{
+    color: white;
+    background-color: dodgerblue;
+    border-radius: 5px;
+    font-size: larger;
+    display: block;
+    padding: 5px;
+    margin: 10px auto;
+}
+
+.messages-signup{
+    display: flex;
+    justify-content: center;
+}
+
+.formStyle-signup{
+    margin: auto;
+    /*display: flex;*/
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    /*width: 500px;*/
+}
+
+.centerAlign{
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+}
+
+.redirect{
+    text-decoration-line: underline;
+}
+
+.redirect:hover{
+    cursor: pointer;
+}
+
+.app-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+    font-family: 'Comfortaa', cursive;
+    background-color: #f8f9fd;
+}
+
+.login-form-signup {
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.title-signup {
+    font-size: 22px;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+}
+
+.input-container-signup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+}
+
+.shift-left {
+    margin-left: 15px;
+}
+
+/*input[type="text"],*/
+/*input[type="password"] {*/
+/*    height: 25px;*/
+/*    border: 1px solid rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+input[type="submit"] {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+}

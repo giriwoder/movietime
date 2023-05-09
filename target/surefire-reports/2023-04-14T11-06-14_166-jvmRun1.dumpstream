@@ -1,0 +1,85 @@
+# Created at 2023-04-14T11:06:29.762
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:398)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+
+# Created at 2023-04-14T11:06:30.106
+Unexpected IOException with stream: 2023-04-14T11:06:30.105-07:00  INFO 73440 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+
+
+# Created at 2023-04-14T11:06:30.108
+Unexpected IOException with stream: 2023-04-14T11:06:30.108-07:00  INFO 73440 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+
+# Created at 2023-04-14T11:06:30.222
+Unexpected IOException with stream: 2023-04-14T11:06:30.221-07:00  INFO 73440 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+
+# Created at 2023-04-14T11:06:30.314
+Unexpected IOException with stream: 2023-04-14T11:06:30.314-07:00  INFO 73440 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+
+
+# Created at 2023-04-14T11:06:30.476
+Unexpected IOException with stream: 2023-04-14T11:06:30.476-07:00  WARN 73440 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+
+# Created at 2023-04-14T11:06:30.716
+Unexpected IOException with stream: 2023-04-14T11:06:30.716-07:00  INFO 73440 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+
+
+# Created at 2023-04-14T11:06:32.026
+Unexpected IOException with stream: 2023-04-14T11:06:32.025-07:00  INFO 73440 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+
+
+# Created at 2023-04-14T11:06:32.037
+Unexpected IOException with stream: 2023-04-14T11:06:32.036-07:00  INFO 73440 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2023-04-14T11:06:32.485
+Unexpected IOException with stream: 2023-04-14T11:06:32.485-07:00  WARN 73440 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+
+# Created at 2023-04-14T11:06:32.668
+Unexpected IOException with stream: 2023-04-14T11:06:32.668-07:00  INFO 73440 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [public/index.html]
+
+
+# Created at 2023-04-14T11:06:32.850
+Unexpected IOException with stream: 2023-04-14T11:06:32.850-07:00  INFO 73440 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+
+
+# Created at 2023-04-14T11:06:32.897
+Unexpected IOException with stream: 2023-04-14T11:06:32.896-07:00  INFO 73440 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+
+# Created at 2023-04-14T11:06:32.898
+Unexpected IOException with stream: 2023-04-14T11:06:32.898-07:00  INFO 73440 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+
+
+# Created at 2023-04-14T11:06:32.902
+Unexpected IOException with stream: 2023-04-14T11:06:32.901-07:00  INFO 73440 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+
+
+# Created at 2023-04-14T11:06:32.924
+Unexpected IOException with stream: 2023-04-14T11:06:32.923-07:00  INFO 73440 --- [           main] e.usc.csci310.project.SpringBootAPITest  : Started SpringBootAPITest in 5.248 seconds (process running for 7.002)
+
+
+# Created at 2023-04-14T11:06:32.925
+Unexpected IOException with stream: 2023-04-14T11:06:32.924-07:00  INFO 73440 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+
+
+# Created at 2023-04-14T11:06:32.926
+Unexpected IOException with stream: 2023-04-14T11:06:32.926-07:00  INFO 73440 --- [ionShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+
+
+# Created at 2023-04-14T11:06:32.933
+Unexpected IOException with stream: 2023-04-14T11:06:32.932-07:00  INFO 73440 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+
+
+# Created at 2023-04-14T11:06:32.938
+Unexpected IOException with stream: 2023-04-14T11:06:32.937-07:00  INFO 73440 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+

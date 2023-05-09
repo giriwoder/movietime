@@ -1,0 +1,11 @@
+edu/usc/csci310/project/com/backend/MovieDetailRepository.class
+edu/usc/csci310/project/com/backend/MovieDetailEntity.class
+edu/usc/csci310/project/com/backend/UserRepository.class
+edu/usc/csci310/project/com/backend/MovieDetailService.class
+edu/usc/csci310/project/com/backend/MovieListRepository.class
+edu/usc/csci310/project/com/backend/UserEntity.class
+edu/usc/csci310/project/com/backend/UserController.class
+edu/usc/csci310/project/com/backend/MovieListService.class
+edu/usc/csci310/project/com/backend/MovieListEntity.class
+edu/usc/csci310/project/com/backend/BackendController.class
+edu/usc/csci310/project/com/backend/UserService.class

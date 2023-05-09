@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MovieListEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">310 Project</a> &gt; <a href="index.source.html" class="el_package">edu.usc.csci310.project.com.backend</a> &gt; <span class="el_source">MovieListEntity.java</span></div><h1>MovieListEntity.java</h1><pre class="source lang-java linenums">package edu.usc.csci310.project.com.backend;
+import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Entity
+@Table(name = &quot;movie_list&quot;)
+public class MovieListEntity {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int listId;
+
+    @Column
+    private String listName;
+
+    @Column
+    private boolean publicList;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = &quot;id&quot;, nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserEntity user;
+
+<span class="fc" id="L28">    @ManyToMany(fetch = FetchType.LAZY, cascade = {</span>
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+    })
+    @JoinTable(name = &quot;list_details&quot;,
+            joinColumns = { @JoinColumn(name = &quot;listID&quot;) },
+            inverseJoinColumns = { @JoinColumn(name = &quot;detailID&quot;) })
+    private Set&lt;MovieDetailEntity&gt; movies = new HashSet&lt;&gt;();
+
+    public void addMovie(MovieDetailEntity movie) {
+<span class="fc" id="L38">        this.movies.add(movie);</span>
+<span class="fc" id="L39">    }</span>
+
+    public void deleteMovie(MovieDetailEntity movie) {
+<span class="fc" id="L42">        this.movies.remove(movie);</span>
+<span class="fc" id="L43">    }</span>
+
+    public Set&lt;MovieDetailEntity&gt; getMovie() {
+<span class="fc" id="L46">        return this.movies;</span>
+    }
+
+    public void setMovie(Set&lt;MovieDetailEntity&gt; movies) {
+<span class="fc" id="L50">        this.movies = movies;</span>
+<span class="fc" id="L51">    }</span>
+
+<span class="fc" id="L53">    public MovieListEntity() {</span>
+
+<span class="fc" id="L55">    }</span>
+    public int getListId()
+    {
+<span class="fc" id="L58">        return listId;</span>
+    }
+
+    public int setListId(int list_id)
+    {
+<span class="fc" id="L63">        return this.listId = list_id;</span>
+    }
+
+    public String getListName()
+    {
+<span class="fc" id="L68">        return listName;</span>
+    }
+
+    public void setListName(String list_name)
+    {
+<span class="fc" id="L73">        this.listName = list_name;</span>
+<span class="fc" id="L74">    }</span>
+
+    public boolean getIsPublic()
+    {
+<span class="fc" id="L78">        return publicList;</span>
+    }
+
+    public void setIsPublic(boolean isPublic)
+    {
+<span class="fc" id="L83">        this.publicList = isPublic;</span>
+<span class="fc" id="L84">    }</span>
+
+    public void setUser(UserEntity user) {
+<span class="fc" id="L87">        this.user = user;</span>
+<span class="fc" id="L88">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

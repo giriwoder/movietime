@@ -1,0 +1,9 @@
+edu/usc/csci310/project/com/backend/MovieDetailTest.class
+edu/usc/csci310/project/com/backend/UserServiceTest.class
+edu/usc/csci310/project/com/backend/BackendControllerTest.class
+edu/usc/csci310/project/CucumberBootstrap.class
+edu/usc/csci310/project/MoviesStepDefs.class
+edu/usc/csci310/project/com/backend/UserControllerTest.class
+edu/usc/csci310/project/CucumberIntegrationTest.class
+edu/usc/csci310/project/SignUpStepDef.class
+edu/usc/csci310/project/com/backend/MovieListTest.class

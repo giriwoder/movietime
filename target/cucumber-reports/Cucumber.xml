@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="44.334" tests="15" skipped="0" failures="0" errors="0">
+<testcase classname="testing out the various parts of the Details page" name="Display movie details" time="4.798">
+<system-out><![CDATA[
+Given I am on the details page..............................................passed
+Then I see "Title" "Release Date" "Plot" "Genres" "Directors" "Cast"........passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of login page" name="Login fail due to invalid email" time="2.346">
+<system-out><![CDATA[
+Given I am on the login page................................................passed
+When I enter "invalid.email" in email field.................................passed
+And I enter "password" in password field....................................passed
+And I click the submit button...............................................passed
+Then I should see "Please enter a valid email" in the page..................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of login page" name="Login fail due to invalid password" time="2.445">
+<system-out><![CDATA[
+Given I am on the login page................................................passed
+When I enter "test@test.com" in email field.................................passed
+And I enter "password" in password field....................................passed
+And I click the submit button...............................................passed
+Then I should see "This email and password cannot be found." in the page....passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of login page" name="Enter nothing to email field" time="2.321">
+<system-out><![CDATA[
+Given I am on the login page................................................passed
+And I click the submit button...............................................passed
+Then I should see "Email cannot be empty" in the page.......................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of login page" name="Enter nothing to password field" time="2.416">
+<system-out><![CDATA[
+Given I am on the login page................................................passed
+And I click the submit button...............................................passed
+Then I should see "Password cannot be empty" in the page....................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the Montage page" name="Can access montage page" time="3.014">
+<system-out><![CDATA[
+Given I am on the user list page with all movies............................passed
+When I press the montage button.............................................passed
+Then I should see a montage in the page.....................................passed
+]]></system-out>
+</testcase>
+<testcase classname="opening the movies page" name="I will be just opening up the movie page" time="2.345">
+<system-out><![CDATA[
+Given I am dummy on the movie page..........................................passed
+Then I should be on a random page that does not matter......................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the Search page" name="open page and enter a movie search and then click the submit button" time="3.124">
+<system-out><![CDATA[
+Given I am on the search page now "test@email.com"..........................passed
+When I enter "Shrek" now....................................................passed
+And I press the submit button now...........................................passed
+Then I should see "Shrek" in the page now...................................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the Search page" name="open search page and enter enter movie search and submit" time="3.003">
+<system-out><![CDATA[
+Given I am on the search page now "test2@gmail.com".........................passed
+When I enter "Titanic" now..................................................passed
+And I press the submit button now...........................................passed
+Then I should see "Titanic" in the page now.................................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the signup page" name="open the page and enter a valid email and password" time="2.448">
+<system-out><![CDATA[
+Given I am on the signup page...............................................passed
+When I enter "test@email.com"...............................................passed
+And I enter "Password1!" in both fields.....................................passed
+And I press the submit button...............................................passed
+Then I should see "successfully registered" in the page.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the signup page" name="open the page and enter an invalid email" time="2.552">
+<system-out><![CDATA[
+Given I am on the signup page...............................................passed
+When I enter "fakeemail"....................................................passed
+And I enter "Password1!" in both fields.....................................passed
+And I press the submit button...............................................passed
+Then I should see "Please enter a valid email" in the page..................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the signup page" name="open the page and enter nothing" time="2.365">
+<system-out><![CDATA[
+Given I am on the signup page...............................................passed
+And I press the submit button...............................................passed
+Then I should see "Field cannot be empty" in the page.......................passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the signup page" name="open the page and enter a valid email, mismatched passwords" time="2.457">
+<system-out><![CDATA[
+Given I am on the signup page...............................................passed
+When I enter "test@email.com"...............................................passed
+And I enter "Password1!" in first field.....................................passed
+And I enter "nomatch" in the second field...................................passed
+And I press the submit button...............................................passed
+Then I should see "Please ensure passwords match" in the page...............passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the various parts of the signup page" name="open the page and enter a valid email, invalid passwords" time="2.59">
+<system-out><![CDATA[
+Given I am on the signup page...............................................passed
+When I enter "test@email.com"...............................................passed
+And I enter "bad" in first field............................................passed
+And I enter "bad" in the second field.......................................passed
+And I press the submit button...............................................passed
+Then I should see "Please ensure you enter a valid password" in the page....passed
+]]></system-out>
+</testcase>
+<testcase classname="testing out the user list page" name="open page and enter a movie search and then click the submit button" time="3.113">
+<system-out><![CDATA[
+Given I on the user list page right now.....................................passed
+When I click on the add list button.........................................passed
+And I press enter into my text field "Shrek"................................passed
+Then I should see a pop up that says "Shrek"................................passed
+]]></system-out>
+</testcase>
+</testsuite>

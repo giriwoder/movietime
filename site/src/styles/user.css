@@ -1,0 +1,180 @@
+.Title {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.movie-button {
+    text-align: center;
+}
+
+.recs-button {
+    text-align: center;
+}
+
+.movie-overlay {
+    /*position: relative;*/
+    /*top: 10%;*/
+    /*width: 80%;*/
+    /*height: 80%;*/
+    width: 75%;
+    position: relative;
+    text-align: center;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+/*img {*/
+/*    position: relative;*/
+/*    left: 10%;*/
+/*    width: 80%;*/
+/*    height: 80%;*/
+/*}*/
+
+.list-rename {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    font-size: 5px;
+    background-color: blue;
+    border-radius: 15px;
+    display: none;
+}
+
+.list-delete {
+    position: absolute;
+    background-color: blue;
+    border-radius: 15px;
+    right: 10%;
+    top: 5%;
+    font-size: 5px;
+    display: none;
+}
+
+.list-public {
+    position: absolute;
+    left: 40%;
+    top: 70%;
+    font-size: 20px;
+    display: none;
+}
+
+.list-compare {
+    position: absolute;
+    background-color: blue;
+    border-radius: 15px;
+    left: 40%;
+    top: 50%;
+    font-size: 5px;
+    display: none;
+}
+
+.list-details {
+    border-radius: 10px;
+    background-color: blue;
+    left: 5%;
+    font-size: 15px;
+    width: 45%;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+}
+
+.list-montage {
+    border-radius: 10px;
+    background-color: blue;
+    right: 5%;
+    font-size: 15px;
+    width: 45%;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    margin-left: 20px;
+}
+
+img:hover {
+    opacity: .1;
+}
+
+.movie-overlay:hover .list-delete {
+    display: block;
+}
+
+.movie-overlay:hover .list-public {
+    display: block;
+}
+
+.movie-overlay:hover .list-rename {
+    display: block;
+}
+
+.movie-overlay:hover .list-compare {
+    display: block;
+}
+/*.submit-button {*/
+/*    margin-left: 10%;*/
+/*}*/
+
+/*.movie-user-list {*/
+/*    width: 80%;*/
+/*}*/
+
+/*.movie-col {*/
+/*    margin-top: 5%;*/
+/*}*/
+
+.user-movie-list {
+    margin-top: 3%;
+    padding-top: 25px;
+}
+
+/*.movie-button {*/
+/*    margin-bottom: 2%;*/
+/*    margin-left: 45%;*/
+/*    margin-top: 2%;*/
+/*}*/
+.image {
+    width: 100%;
+    height: 350px;
+    /*overflow: hidden;*/
+}
+.random-name {
+    left: 10%;
+}
+.hover-label .tool-tip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    left: 120%;
+}
+
+.hover-label:hover .tool-tip-text {
+    visibility: visible;
+}
+
+@media only screen and (max-width: 767px) {
+    .list-rename {
+        display: none;
+    }
+    .list-public {
+        display: none;
+        font-size: 10px;
+    }
+    .list-delete {
+        display: none;
+    }
+    .list-compare {
+        display: none;
+    }
+    .list-details {
+        font-size: 10px;
+    }
+    .list-montage {
+        font-size: 10px;
+    }
+}
+
+/*.list-button {*/
+/*    margin-top: 5%;*/
+/*}*/

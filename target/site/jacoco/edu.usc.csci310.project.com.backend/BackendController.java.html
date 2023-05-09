@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BackendController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">310 Project</a> &gt; <a href="index.source.html" class="el_package">edu.usc.csci310.project.com.backend</a> &gt; <span class="el_source">BackendController.java</span></div><h1>BackendController.java</h1><pre class="source lang-java linenums">package edu.usc.csci310.project.com.backend;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@RestController
+@RequestMapping(&quot;/daniel&quot;) // sorry I will change this later lmao
+<span class="fc" id="L13">public class BackendController {</span>
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    MovieDetailRepository movieDetailRepository;
+
+    @Autowired
+    MovieListRepository movieListRepository;
+
+    @PostMapping(&quot;{list_id}/{movie_id}/existingMovie&quot;)
+    public ResponseEntity&lt;MovieDetailEntity&gt; addExistingMovie(@PathVariable(&quot;list_id&quot;) int listId, @PathVariable(&quot;movie_id&quot;) int movieId) {
+<span class="fc" id="L25">        MovieDetailEntity movie = movieDetailRepository.findByMovieDbId(movieId);</span>
+<span class="fc" id="L26">        MovieListEntity list = movieListRepository.findById(listId).get();</span>
+<span class="fc" id="L27">        list.addMovie(movie);</span>
+<span class="fc" id="L28">        movieListRepository.save(list);</span>
+<span class="fc" id="L29">        return new ResponseEntity&lt;MovieDetailEntity&gt;(movie, HttpStatus.OK);</span>
+    }
+
+    @PostMapping(&quot;/{userID}/list&quot;)
+    public ResponseEntity&lt;MovieListEntity&gt; addList(@PathVariable(&quot;userID&quot;) int id, @RequestBody MovieListEntity listRequest) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (!userRepository.existsById(id)) {</span>
+<span class="fc" id="L35">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+//        else if (movieListRepository.existsByListName(listRequest.getListName())) {
+//            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);
+//        }
+        else {
+<span class="fc" id="L41">            UserEntity user = userRepository.findById(id);</span>
+<span class="fc" id="L42">            Set&lt;MovieListEntity&gt; lists = user.getLists();</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            for (MovieListEntity list: lists) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                if (list.getListName().equals(listRequest.getListName())) {</span>
+<span class="fc" id="L45">                    return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+                }
+<span class="fc" id="L47">            }</span>
+<span class="fc" id="L48">            MovieListEntity newList = new MovieListEntity();</span>
+<span class="fc" id="L49">            newList.setListName(listRequest.getListName());</span>
+<span class="fc" id="L50">            newList.setUser(user);</span>
+<span class="fc" id="L51">            newList.setIsPublic(listRequest.getIsPublic());</span>
+<span class="fc" id="L52">            movieListRepository.save(newList);</span>
+<span class="fc" id="L53">            user.addMovieList(newList);</span>
+<span class="fc" id="L54">            userRepository.save(user);</span>
+<span class="fc" id="L55">            return new ResponseEntity&lt;MovieListEntity&gt;(newList, HttpStatus.OK);</span>
+        }
+    }
+
+    @PostMapping(&quot;/{userID}/{listID}/movie&quot;)
+    public ResponseEntity&lt;MovieDetailEntity&gt; addMovie(@PathVariable(&quot;userID&quot;) int userID, @PathVariable(&quot;listID&quot;) int listID, @RequestBody MovieDetailEntity movieRequest) {
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L62">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L65">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (!movieDetailRepository.existsByMovieDbId(movieRequest.getMovieDbId())) {</span>
+<span class="fc" id="L68">            MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L69">            MovieDetailEntity movie = new MovieDetailEntity();</span>
+<span class="fc" id="L70">            movie.setMovieDbId(movieRequest.getMovieDbId());</span>
+<span class="fc" id="L71">            movie.setActors(movieRequest.getActors());</span>
+<span class="fc" id="L72">            movie.setGenre(movieRequest.getGenre());</span>
+<span class="fc" id="L73">            movie.setPicture(movieRequest.getPicture());</span>
+<span class="fc" id="L74">            movie.setPlot(movieRequest.getPlot());</span>
+<span class="fc" id="L75">            movie.setStudio(movieRequest.getStudio());</span>
+<span class="fc" id="L76">            movie.setTitle(movieRequest.getTitle());</span>
+<span class="fc" id="L77">            movie.setDirectors(movieRequest.getDirectors());</span>
+<span class="fc" id="L78">            movie.addMovies(list);</span>
+<span class="fc" id="L79">            movieDetailRepository.save(movie);</span>
+<span class="fc" id="L80">            list.addMovie(movie);</span>
+<span class="fc" id="L81">            movieListRepository.save(list);</span>
+<span class="fc" id="L82">            return new ResponseEntity&lt;MovieDetailEntity&gt;(movie, HttpStatus.OK);</span>
+        }
+        else {
+<span class="fc" id="L85">            MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L86">            Set&lt;MovieDetailEntity&gt; currentMovies = list.getMovie();</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            for(MovieDetailEntity i: currentMovies) {</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">                if (movieRequest.getMovieDbId() == i.getMovieDbId()) {</span>
+<span class="fc" id="L89">                    return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+                }
+<span class="fc" id="L91">            }</span>
+<span class="fc" id="L92">            MovieDetailEntity movie = movieDetailRepository.findByMovieDbId(movieRequest.getMovieDbId());</span>
+<span class="fc" id="L93">            movie.addMovies(list);</span>
+<span class="fc" id="L94">            movieDetailRepository.save(movie);</span>
+<span class="fc" id="L95">            list.addMovie(movie);</span>
+<span class="fc" id="L96">            movieListRepository.save(list);</span>
+<span class="fc" id="L97">            return new ResponseEntity&lt;MovieDetailEntity&gt;(movieRequest, HttpStatus.OK);</span>
+        }
+    }
+
+    @PostMapping(&quot;/compare/{userId}/{firstList}/{secondList}&quot;)
+    public ResponseEntity&lt;MovieListEntity&gt; compareLists(@PathVariable(&quot;userId&quot;) int userId,@PathVariable(&quot;firstList&quot;) int firstId, @PathVariable(&quot;secondList&quot;) int secondId, @RequestBody MovieListEntity listRequest) {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (!userRepository.existsById(userId)) {</span>
+<span class="fc" id="L104">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!movieListRepository.existsById(secondId)) {</span>
+<span class="fc" id="L107">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (!movieListRepository.existsById(firstId)) {</span>
+<span class="fc" id="L110">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L112">        Set&lt;MovieDetailEntity&gt; set1 = movieListRepository.findById(firstId).get().getMovie();</span>
+<span class="fc" id="L113">        Set&lt;MovieDetailEntity&gt; set2 = movieListRepository.findById(secondId).get().getMovie();</span>
+<span class="fc" id="L114">        Set&lt;MovieDetailEntity&gt; finalSet = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        for (MovieDetailEntity movie: set1) {</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            for (MovieDetailEntity movie1: set2) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">                if (movie.getMovieDbId() == movie1.getMovieDbId()) {</span>
+<span class="fc" id="L118">                    finalSet.add(movie);</span>
+                }
+<span class="fc" id="L120">            }</span>
+<span class="fc" id="L121">        }</span>
+<span class="fc" id="L122">        MovieListEntity newList = new MovieListEntity();</span>
+<span class="fc" id="L123">        UserEntity user = userRepository.findById(userId);</span>
+<span class="fc" id="L124">        newList.setMovie(finalSet);</span>
+<span class="fc" id="L125">        newList.setListName(listRequest.getListName());</span>
+<span class="fc" id="L126">        newList.setIsPublic(listRequest.getIsPublic());</span>
+<span class="fc" id="L127">        newList.setUser(user);</span>
+<span class="fc" id="L128">        movieListRepository.save(newList);</span>
+<span class="fc" id="L129">        user.addMovieList(newList);</span>
+<span class="fc" id="L130">        userRepository.save(user);</span>
+<span class="fc" id="L131">        return new ResponseEntity&lt;MovieListEntity&gt;(newList, HttpStatus.OK);</span>
+    }
+
+    @GetMapping(&quot;/user&quot;)
+    public ResponseEntity&lt;Set&lt;UserEntity&gt;&gt; getUsers() {
+<span class="fc" id="L136">        Set&lt;UserEntity&gt; users = userRepository.findAll();</span>
+<span class="fc" id="L137">        return new ResponseEntity&lt;Set&lt;UserEntity&gt;&gt;(users, HttpStatus.OK);</span>
+    }
+
+    @GetMapping(&quot;/{user_ID}/list&quot;)
+    public ResponseEntity&lt;Set&lt;MovieListEntity&gt;&gt; getLists(@PathVariable (&quot;user_ID&quot;) int user_ID){
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (!userRepository.existsById(user_ID)) {</span>
+<span class="fc" id="L143">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L145">        UserEntity user = userRepository.findById(user_ID);</span>
+<span class="fc" id="L146">        return new ResponseEntity&lt;Set&lt;MovieListEntity&gt;&gt;(user.getLists(), HttpStatus.OK);</span>
+    }
+
+    @GetMapping(&quot;/{movie_id}/movie&quot;)
+    public ResponseEntity&lt;Set&lt;MovieListEntity&gt;&gt; getSingleMovie(@PathVariable(&quot;movie_id&quot;) int movieId) {
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (!movieDetailRepository.existsByMovieDbId(movieId)) {</span>
+<span class="fc" id="L152">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L154">        MovieDetailEntity movie = movieDetailRepository.findByMovieDbId(movieId);</span>
+<span class="fc" id="L155">        return new ResponseEntity&lt;Set&lt;MovieListEntity&gt;&gt;(movie.GetMoviesLists(), HttpStatus.OK);</span>
+    }
+
+    @GetMapping(&quot;/{user_ID}/{list_ID}/{movie_id}/movies&quot;)
+    public ResponseEntity&lt;MovieDetailEntity&gt; getMovies(@PathVariable(&quot;user_ID&quot;) int userID, @PathVariable(&quot;list_ID&quot;) int listID, @PathVariable(&quot;movie_id&quot;) int movieID) {
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L161">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L164">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (!movieDetailRepository.existsById(movieID)) {</span>
+<span class="fc" id="L167">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L169">        MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L170">        Set&lt;MovieDetailEntity&gt; movies = list.getMovie();</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        for (MovieDetailEntity movie: movies) {</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">            if (movie.GetTutorialId() == movieID) {</span>
+<span class="fc" id="L173">                return new ResponseEntity&lt;MovieDetailEntity&gt;(movie, HttpStatus.OK);</span>
+            }
+<span class="fc" id="L175">        }</span>
+<span class="fc" id="L176">        return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+    }
+
+    @GetMapping(&quot;/{user_ID}/{list_ID}/movies&quot;)
+    public ResponseEntity&lt;Set&lt;MovieDetailEntity&gt;&gt; getMovies(@PathVariable(&quot;user_ID&quot;) int userID, @PathVariable(&quot;list_ID&quot;) int listID) {
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L182">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L184" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L185">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L187">        MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L188">        return new ResponseEntity&lt;Set&lt;MovieDetailEntity&gt;&gt;(list.getMovie(), HttpStatus.OK);</span>
+    }
+
+
+    @PutMapping(&quot;/{user_id}/{list_id}/name&quot;)
+    public ResponseEntity&lt;String&gt; changeListName(@PathVariable(&quot;user_id&quot;) int userID, @PathVariable(&quot;list_id&quot;) int listID, @RequestBody String name) {
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L195">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L198">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L200">        MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L201">        list.setListName(name);</span>
+<span class="fc" id="L202">        movieListRepository.save(list);</span>
+<span class="fc" id="L203">        return new ResponseEntity&lt;String&gt;(list.getListName(), HttpStatus.OK);</span>
+    }
+
+    @DeleteMapping(&quot;/{user_id}/{list_id}/list&quot;)
+    public ResponseEntity&lt;HttpStatus&gt; removeList(@PathVariable(&quot;user_id&quot;) int userID, @PathVariable(&quot;list_id&quot;) int listID) {
+<span class="fc bfc" id="L208" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L209">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L211" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L212">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L214">        movieListRepository.deleteById(listID);</span>
+<span class="fc" id="L215">        return new ResponseEntity&lt;HttpStatus&gt;(HttpStatus.OK);</span>
+    }
+
+    @DeleteMapping(&quot;/{user_id}/{list_id}/{movie_id}/movie&quot;)
+    public ResponseEntity&lt;MovieListEntity&gt; removeMovie(@PathVariable(&quot;user_id&quot;) int userID, @PathVariable(&quot;list_id&quot;) int listID, @PathVariable(&quot;movie_id&quot;) int movieID) {
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!userRepository.existsById(userID)) {</span>
+<span class="fc" id="L221">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        if (!movieListRepository.existsById(listID)) {</span>
+<span class="fc" id="L224">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (!movieDetailRepository.existsByMovieDbId(movieID)) {</span>
+<span class="fc" id="L227">            return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
+        }
+<span class="fc" id="L229">        MovieListEntity list = movieListRepository.findById(listID).get();</span>
+<span class="fc" id="L230">        Set&lt;MovieDetailEntity&gt; movies = list.getMovie();</span>
+<span class="fc" id="L231">        Set&lt;MovieDetailEntity&gt; newMovies = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">        for (MovieDetailEntity movie: movies) {</span>
+<span class="fc bfc" id="L233" title="All 2 branches covered.">            if (movie.getMovieDbId() != movieID) {</span>
+<span class="fc" id="L234">                newMovies.add(movie);</span>
+            }
+<span class="fc" id="L236">        }</span>
+<span class="fc" id="L237">        list.setMovie(newMovies);</span>
+<span class="fc" id="L238">        movieListRepository.save(list);</span>
+<span class="fc" id="L239">        return new ResponseEntity&lt;MovieListEntity&gt;(list,HttpStatus.OK);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
